@@ -11,13 +11,16 @@ repository = "https://github.com/image-rs/image-png.git"
 edition = "2018"
 exclude = [
     "tests/*",
+    "/sgx/*",
 ]
 
 [dependencies]
-inflate = "0.4.2"
-deflate = { version = "0.7.12", optional = true }
+inflate = { git = "https://github.com/mesalock-linux/inflate-sgx" }
+deflate = { git = "https://github.com/mesalock-linux/deflate-rs-sgx", branch = "dev", optional = true }
+num-iter = { git = "https://github.com/mesalock-linux/num-iter-sgx" }
 bitflags = "1.0"
-crc32fast = "1.2.0"
+crc32fast = { git = "https://github.com/mesalock-linux/rust-crc32fast-sgx" }
+sgx_tstd = { rev = "v1.0.9", git = "https://github.com/baidu/rust-sgx-sdk.git", optional = true }
 
 [dev-dependencies]
 getopts = "0.2.14"
@@ -32,6 +35,7 @@ default-features = false
 
 [features]
 png-encoding = ["deflate"]
-default = ["png-encoding"]
+default = ["png-encoding", "mesalock_sgx"]
 unstable = []
 benchmarks = []
+mesalock_sgx = ["sgx_tstd"]
