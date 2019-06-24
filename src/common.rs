@@ -1,4 +1,5 @@
 //! Common types shared between the encoder and decoder
+use std::prelude::v1::*;
 use crate::filter;
 
 use std::fmt;

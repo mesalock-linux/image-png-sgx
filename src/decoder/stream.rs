@@ -1,6 +1,7 @@
 extern crate crc32fast;
 extern crate inflate;
 
+use std::prelude::v1::*;
 use std::borrow::Cow;
 use std::default::Default;
 use std::error;
@@ -90,6 +91,7 @@ pub enum DecodingError {
 }
 
 impl error::Error for DecodingError {
+    #[allow(deprecated)]
     fn description(&self) -> &str {
         use self::DecodingError::*;
         match *self {
@@ -104,6 +106,7 @@ impl error::Error for DecodingError {
 }
 
 impl fmt::Display for DecodingError {
+    #[allow(deprecated)]
     fn fmt(&self, fmt: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         write!(fmt, "{}", (self as &dyn error::Error).description())
     }
@@ -122,6 +125,7 @@ impl From<String> for DecodingError {
 }
 
 impl From<DecodingError> for io::Error {
+    #[allow(deprecated)]
     fn from(err: DecodingError) -> io::Error {
         use std::error::Error;
         match err {

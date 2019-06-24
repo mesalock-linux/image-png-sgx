@@ -1,5 +1,6 @@
 mod stream;
 
+use std::prelude::v1::*;
 pub use self::stream::{StreamingDecoder, Decoded, DecodingError};
 use self::stream::{CHUNCK_BUFFER_SIZE, get_info};
 

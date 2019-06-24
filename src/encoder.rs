@@ -1,6 +1,7 @@
 extern crate crc32fast;
 extern crate deflate;
 
+use std::prelude::v1::*;
 use std::borrow::Cow;
 use std::error;
 use std::fmt;
@@ -24,6 +25,7 @@ pub enum EncodingError {
 }
 
 impl error::Error for EncodingError {
+    #[allow(deprecated)]
     fn description(&self) -> &str {
         use self::EncodingError::*;
         match *self {
@@ -34,6 +36,7 @@ impl error::Error for EncodingError {
 }
 
 impl fmt::Display for EncodingError {
+    #[allow(deprecated)]
     fn fmt(&self, fmt: &mut fmt::Formatter) -> result::Result<(), fmt::Error> {
         write!(fmt, "{}", (self as &dyn error::Error).description())
     }
@@ -45,6 +48,7 @@ impl From<io::Error> for EncodingError {
     }
 }
 impl From<EncodingError> for io::Error {
+    #[allow(deprecated)]
     fn from(err: EncodingError) -> io::Error {
         io::Error::new(io::ErrorKind::Other, (&err as &dyn error::Error).description())
     }
